@@ -1,8 +1,9 @@
-package Service;
+package com.example.demo.Service;
 
 import java.util.List;
 
-import Entity.Custom;
+import com.example.demo.Entity.Custom;
+
 
 public interface StudentServiceinterface {
 		Custom saveStudent(Custom custom);
