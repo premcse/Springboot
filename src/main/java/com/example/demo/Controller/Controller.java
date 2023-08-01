@@ -1,8 +1,15 @@
 package com.example.demo.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +30,33 @@ public class Controller {
 	}
 	
 	@PostMapping("/addstudent")
-    public Custom saveStudent(@RequestBody Custom custom) {
-        return studentserviceinterface.saveStudent(custom);
+    public ResponseEntity<Custom> saveStudent(@RequestBody Custom custom) {
+		Custom student = studentserviceinterface.saveStudent(custom);
+        return new ResponseEntity<Custom>(student, HttpStatus.OK);
     }
+	
+	@GetMapping("/list")
+	public ResponseEntity<List<Custom>> ViewStudents(){
+		List<Custom> students = studentserviceinterface.ViewStudents();
+		return new ResponseEntity<List<Custom>>(students, HttpStatus.OK); 
+	}
+	
+	@GetMapping("/list/{id}")
+	public ResponseEntity<Custom> showStudent(@PathVariable("id") Integer id){
+		Custom student = studentserviceinterface.showStudent(id);
+		return new ResponseEntity<Custom>(student, HttpStatus.OK);
+	}
+	
+	@PutMapping("/update")
+	public ResponseEntity<Custom> updateStudent(@RequestBody Custom custom){
+		Custom student = studentserviceinterface.updateStudent(custom);
+		return new ResponseEntity<Custom>(student, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Custom> deleteStudent(@PathVariable("id") Integer id){
+		boolean student = studentserviceinterface.deleteStudent(id);
+		return new ResponseEntity<Custom>(HttpStatus.OK);
+	}
 
 }

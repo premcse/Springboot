@@ -22,28 +22,35 @@ public class Studentservice implements StudentServiceinterface {
 		return studentinterface.save(custom);
 	}
 
-	@Override
-	public Custom updateStudent(Custom custom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Custom> ViewStudents() {
 		// TODO Auto-generated method stub
-		return null;
+		return studentinterface.findAll();
 	}
 
 	@Override
 	public Custom showStudent(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return studentinterface.findById(id).get();
 	}
 
 	@Override
 	public boolean deleteStudent(Integer id) {
 		// TODO Auto-generated method stub
-		return false;
+		studentinterface.deleteById(id);
+		return true;
+	}
+
+
+	@Override
+	public Custom updateStudent(Custom custom) {
+		Custom existingstudent = studentinterface.findById(custom.getId()).orElse(null);
+		existingstudent.setName(custom.getName());
+		existingstudent.setRollno(custom.getRollno());
+		existingstudent.setGender(custom.getGender());
+		// TODO Auto-generated method stub
+		return studentinterface.save(existingstudent);
 	}
 
 
