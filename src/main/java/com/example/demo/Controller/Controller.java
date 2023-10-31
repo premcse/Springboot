@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Entity.Custom;
@@ -25,8 +26,13 @@ public class Controller {
 	StudentServiceinterface studentserviceinterface;
 	
 	@GetMapping("/demo")
-	public String demo() {
-		return "demo";
+	public String demo(@RequestParam("ll") String ll, String names) {
+		return "My name is "+ll+names;
+	}
+	
+	@GetMapping("/demo2")
+	public String demo2(@RequestBody String name) {
+		return "My name is "+name;
 	}
 	
 	@PostMapping("/addstudent")
